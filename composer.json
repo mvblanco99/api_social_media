@@ -1,0 +1,24 @@
+{
+    "name": "api/api_social_media",
+    "description": "api social media",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Api\\ApiUsers\\": "src/users",
+            "Api\\ApiPosts\\": "src/posts",
+            "Api\\ApiReactions\\": "src/reactions",
+            "Api\\ApiRoutes\\": "src/routes",
+            "Api\\ApiConnection\\": "src/connection",
+            "Api\\ApiUtilities\\": "src/utilities"
+        }
+    },
+    "authors": [
+        {
+            "name": "mvblanco99",
+            "email": "manuelvalentin1999@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
