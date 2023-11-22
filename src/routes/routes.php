@@ -78,10 +78,10 @@
 
         public function router(){
 
-            //Obtenemos la url
+            //Obtenemos la url separada en cadenas
             $request_uri = explode('?', $_SERVER['REQUEST_URI']);
 
-            //guardamos los parametros de la cadena
+            //guardamos la cadena de parametros url
             $url_params = $request_uri[1];
 
             //Separamos en partes la cadena de parametros
