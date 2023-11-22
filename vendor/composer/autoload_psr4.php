@@ -13,5 +13,6 @@ return array(
     'Api\\ApiRoutes\\' => array($baseDir . '/src/routes'),
     'Api\\ApiReactions\\' => array($baseDir . '/src/reactions'),
     'Api\\ApiPosts\\' => array($baseDir . '/src/posts'),
+    'Api\\ApiLogin\\' => array($baseDir . '/src/log'),
     'Api\\ApiConnection\\' => array($baseDir . '/src/connection'),
 );

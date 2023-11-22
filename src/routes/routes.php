@@ -3,13 +3,16 @@
     namespace Api\ApiRoutes;
     use Api\ApiUsers\UserController;
     use Api\ApiPosts\PostController;
+    use Api\ApiLogin\LoginController;
+    use Predis\Client;
     
     class Routes{
 
         private $available_class = [
             'users' => UserController::class,
             'posts' => PostController::class,
-            'reactions' => 'reactions' 
+            'reactions' => 'reactions',
+            'login' => LoginController::class
         ];
 
         public function checkCategoryExistence($name_category){
@@ -107,9 +110,22 @@
                     if(class_exists($objectClass)){
                         /*Creamos una instacia de la clase 
                         correspondiente a la categoria solicitada*/
-                        $controller = new $objectClass();
-                        $response = $this->classify_response($controller->index());
-                        echo json_encode($response);
+                        
+                        if($objectClass == 'Api\ApiLogin\LoginController'){
+                            
+                            $redis = new Client();
+                            $controller = new $objectClass($redis);
+                            $response = $this->classify_response($controller->index());
+                            echo json_encode($response);
+                        
+                        }else{
+                            
+                            $controller = new $objectClass();
+                            $response = $this->classify_response($controller->index());
+                            echo json_encode($response);
+
+                        }
+
                     }else{
                         echo json_encode(['error' =>'Por el momento no podemos procesar su solicitud']);
                     }

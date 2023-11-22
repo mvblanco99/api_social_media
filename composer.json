@@ -10,7 +10,8 @@
             "Api\\ApiReactions\\": "src/reactions",
             "Api\\ApiRoutes\\": "src/routes",
             "Api\\ApiConnection\\": "src/connection",
-            "Api\\ApiUtilities\\": "src/utilities"
+            "Api\\ApiUtilities\\": "src/utilities",
+            "Api\\ApiLogin\\": "src/log"
         }
     },
     "authors": [
