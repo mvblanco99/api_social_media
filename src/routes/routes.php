@@ -34,31 +34,64 @@
             }
         }
 
-        // public function check_url($url){
+        public function check_url($url){
 
-        //     // Separar la cadena en pares clave=valor
-        //     $pares = explode('&', $url);
-        //     // Definir el orden esperado de las claves
-        //     $orden_esperado = ['categoria', 'accion', 'param'];
+            //La url tiene que verse asi : (Dominio)?categoria=value&accion=value&param=value
+            //El parametro 'param' es opcional, se utiliza dependendiendo de la accion seleccionada
+            //obligatoriamente de venir la categoria y la accion en la url, en este orden.
 
-        //     // Verificar si las claves están en el orden correcto
-        //     if (count($pares) === count($orden_esperado) && array_keys($pares) === $orden_esperado) {
-        //         echo "Las claves están en el orden correcto.";
-        //     } else {
-        //         echo "Las claves no están en el orden correcto.";
-        //     }
-        // }
+            $message_error = ['error' => 'Url no cumple con el formato solicitado'];
+
+            $array_keys= array();
+
+            foreach ($url as $key => $value) {
+                array_push($array_keys,explode('=', $value)[0]);
+            }
+
+            if(count($array_keys) > 0 && count($array_keys) < 4){
+
+                foreach ($array_keys as $key => $value) {
+
+                    if($key == 0 && $value != 'categoria'){
+                        echo json_encode($message_error);
+                        die();
+                    }
+
+                    if($key == 1 && $value != 'accion'){
+                        echo json_encode($message_error);
+                        die();
+                    }
+
+                    if(count($array_keys) > 2){
+                        if($key == 2 && $value != 'param'){
+                            echo json_encode($message_error);
+                            die();
+                        }
+                    }
+                }
+
+            }else{
+                echo json_encode($message_error);
+                die();
+            }
+        }
 
         public function router(){
 
+            //Obtenemos la url
+            $request_uri = explode('?', $_SERVER['REQUEST_URI']);
+
+            //guardamos los parametros de la cadena
+            $url_params = $request_uri[1];
+
+            //Separamos en partes la cadena de parametros
+            $url_params = explode('&', $url_params);
+            
+            //verificamos la url
+            $this->check_url($url_params);
+
             // Obtener todos los parámetros de la URL
             $parameters = $_GET;
-
-            //Validamos que la url esta escrita correctamente
-            // $request_uri = explode('/', $_SERVER['REQUEST_URI']);
-            // $cadena = substr($request_uri[2],1,strlen($request_uri[2])-1);
-            // $this->check_url($cadena);
-            
 
             //Verificar que el parametro categoria tenga contenido
             if (isset($parameters['categoria'])) {
