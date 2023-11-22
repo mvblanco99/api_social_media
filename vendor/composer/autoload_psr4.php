@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Api\\ApiUtilities\\' => array($baseDir . '/src/utilities'),
     'Api\\ApiUsers\\' => array($baseDir . '/src/users'),
