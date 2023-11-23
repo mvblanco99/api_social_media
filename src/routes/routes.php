@@ -22,7 +22,6 @@
         }
 
         public function classify_response($arr){
-            
             /*
                 - El parametro $arr es un array con dos valores. 
                 - Posicion 0 = tiene el mensaje que se enviara al cliente
