@@ -40,8 +40,8 @@
         }
 
         public function add_user($name, $lastname, $password, $username, $img){
-            $sql = "INSERT INTO users (name, lastname, username, password, img) 
-            VALUES ('$name','$lastname','$username','$password','$img')";
+            $sql = "INSERT INTO users (name, lastname, username, password, img, creation_user) 
+            VALUES ('$name','$lastname','$username','$password','$img',NOW())";
 
             $is_register;
 

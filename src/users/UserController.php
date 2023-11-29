@@ -87,15 +87,18 @@ class UserController {
 
         //Verificamos si la ruta del directorio Images existe
         if(is_dir($route_directory_images)){
-            if(!is_dir($route_directory_images.'/'. $username)){
+            if(!is_dir($route_directory_images. '/' . $username)){
                 //creamos el directorio del uduario
-                mkdir($route_directory_images.'/'. $username);
+                mkdir($route_directory_images. '/' . $username);
             }
         }
 
-        //Insertamos foto de perfil por defecto
-        $img = 'Images/Image_Profile_Default/blank-profile-picture.jpg';
+        $protocolo = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+        $dominio = $_SERVER['HTTP_HOST'];
 
+
+        //Insertamos foto de perfil por defecto
+        $img = $protocolo .'' . $dominio . '/api/src/Images/Image_Profile_Default/blank-profile-picture.jpg';
         $response =  $this->user_model->add_user($name, $lastname, $password, $username, $img);
         
         if ($response == 0){
