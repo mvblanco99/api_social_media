@@ -39,9 +39,9 @@
             return $users;
         }
 
-        function add_user($name, $lastname, $password, $username){
+        public function add_user($name, $lastname, $password, $username, $img){
             $sql = "INSERT INTO users (name, lastname, username, password, img) 
-            VALUES ('$name','$lastname','$username','$password','')";
+            VALUES ('$name','$lastname','$username','$password','$img')";
 
             $is_register;
 
@@ -57,4 +57,27 @@
             return $is_register;
     
         }
+
+        public function search_user_for_username($username){
+            // Consulta para obtener todos los posts de un usuario
+            $sql = "SELECT * FROM users
+            WHERE username = '$username'";
+
+            $result = $this->conn->query($sql);
+    
+            // Devolver los resultados como un array JSON
+            $user = array();
+            if ($result->num_rows > 0) {
+                // Output data of each row
+                while($row = $result->fetch_assoc()) {
+                    $user[] = $row;
+                }
+            }
+
+            // Cerrar conexión
+            // $this->conn->close();
+    
+            return $user;
+        }
+
     }
