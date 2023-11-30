@@ -111,7 +111,22 @@
         }
 
         public function logout(){
+            
+            //Obtener datos del cuerpo de la solicitud
+            $datacliente = file_get_contents('php://input');
+            // Decodificar datos como JSON
+            $data = json_decode($datacliente, true);
+            
+            // Acceder a los datos
+            $username = $data;
+            
 
+            $nameKeytoken = 'token:' .$username;
+            // Eliminar el token JWT de Redis
+            $responseRedis = $this->redisClient->del($nameKeytoken);
+
+            return [$responseRedis,1];
+            
             
 
         }

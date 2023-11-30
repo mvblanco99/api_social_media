@@ -3,7 +3,7 @@
         'name' => 'api/api_social_media',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'df9c73fe27dc8a0454c1dff35131d54c71ebcfc0',
+        'reference' => '11634225e1635b3ee396108261610841cf624f6b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'api/api_social_media' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'df9c73fe27dc8a0454c1dff35131d54c71ebcfc0',
+            'reference' => '11634225e1635b3ee396108261610841cf624f6b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

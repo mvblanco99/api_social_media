@@ -2,6 +2,7 @@
 
     namespace Api\ApiConnection;
     use mysqli;
+    use Exception;
 
     class Connection{
 
