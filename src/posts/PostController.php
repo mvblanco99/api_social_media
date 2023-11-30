@@ -5,6 +5,14 @@
     use Api\ApiUtilities\Utilities;
     use stdClass;
 
+     // Habilitar CORS solo para solicitudes desde http://localhost:5173
+     header("Access-Control-Allow-Origin: http://localhost:5173");
+     // Permitir solo solicitudes POST y GET
+     header("Access-Control-Allow-Methods: POST, GET");
+     // Permitir ciertos encabezados
+     header("Access-Control-Allow-Headers: Content-Type");
+     //Recibir las urls y decidir que accion ejecutar
+
     class PostController{
 
         private $utilities;

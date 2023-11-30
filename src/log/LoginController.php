@@ -2,18 +2,34 @@
 
     namespace Api\ApiLogin;
     use Api\ApiLogin\LoginModel;
+    use Api\ApiUtilities\Utilities;
     use Firebase\JWT\JWT;
     use Predis\Client;
     use stdClass;
+
+      // Habilitar CORS solo para solicitudes desde http://localhost:5173
+      header("Access-Control-Allow-Origin: http://localhost:5173");
+      // Permitir solo solicitudes POST y GET
+      header("Access-Control-Allow-Methods: POST, GET");
+      // Permitir ciertos encabezados
+      header("Access-Control-Allow-Headers: Content-Type");
+      //Recibir las urls y decidir que accion ejecutar
 
     class LoginController{
 
         private $redisClient;
         private $data_user;
+        private $utilities;
 
         public function __construct(Client $redisClient){
             $this->redisClient = $redisClient;
+            $this->utilities = new Utilities();
         }
+
+        private $available_actions = [
+            'login' => 'login',
+            'logout' => 'logout',
+        ];
 
         public function wrap_data_user($id, $name, $lastname, $img, $username){
             $user = new stdClass();
@@ -67,7 +83,17 @@
         }
 
         // Función para iniciar sesión en la aplicación
-        public function login($username, $password) {
+        public function login() {
+
+            //Obtener datos del cuerpo de la solicitud
+            $datacliente = file_get_contents('php://input');
+            // Decodificar datos como JSON
+            $data = json_decode($datacliente, true);
+ 
+            // Acceder a los datos
+            $username = $data['username'];
+            $password = $data['password'];
+
             // Verificar las credenciales del usuario
             if (!$this->verify_credentials($username, $password)) {
                 return ['Invalid credentials', 2];
@@ -84,16 +110,32 @@
             return [['auth_token' => $token], 1];
         }
 
+        public function logout(){
+
+            
+
+        }
+
         public function index(){
-            //Obtener datos del cuerpo de la solicitud
-            $datacliente = file_get_contents('php://input');
-            // Decodificar datos como JSON
-            $data = json_decode($datacliente, true);
- 
-            // Acceder a los datos
-            $username = $data['username'];
-            $password = $data['password'];
-            $response = $this->login($username,$password);
-            return $response;
+
+            if(isset($_GET['accion'])){
+    
+                //Recuperamos el parametro accion
+                $action = $_GET['accion'];
+    
+                //Verificar si la acción existe en nuestro arreglo de actions disponibles
+                if($this->utilities->check_action($action, $this->available_actions)) { 
+                    // Ejecutamos la accion
+                    $response = $this->$action();
+                    return $response;
+                }else{
+                    return ["Accion no invalida",2];
+                }
+      
+            }else{
+                return ["Accion no definida",2];
+            }
+
+            
         }
     }
