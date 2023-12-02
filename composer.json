@@ -11,7 +11,8 @@
             "Api\\ApiRoutes\\": "src/routes",
             "Api\\ApiConnection\\": "src/connection",
             "Api\\ApiUtilities\\": "src/utilities",
-            "Api\\ApiLogin\\": "src/log"
+            "Api\\ApiLogin\\": "src/log",
+            "Api\\ApiNotifications\\": "src/notifications"
         }
     },
     "authors": [

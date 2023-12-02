@@ -22,6 +22,7 @@ class ComposerStaticInit045e27221f34dab316d9f94d71414c0b
             'Api\\ApiRoutes\\' => 14,
             'Api\\ApiReactions\\' => 17,
             'Api\\ApiPosts\\' => 13,
+            'Api\\ApiNotifications\\' => 21,
             'Api\\ApiLogin\\' => 13,
             'Api\\ApiConnection\\' => 18,
         ),
@@ -55,6 +56,10 @@ class ComposerStaticInit045e27221f34dab316d9f94d71414c0b
         'Api\\ApiPosts\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/posts',
+        ),
+        'Api\\ApiNotifications\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/notifications',
         ),
         'Api\\ApiLogin\\' => 
         array (

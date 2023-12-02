@@ -4,6 +4,7 @@
     use Api\ApiUsers\UserController;
     use Api\ApiPosts\PostController;
     use Api\ApiLogin\LoginController;
+    use Api\ApiNotifications\FriendsSuggestionController;
     use Predis\Client;
     
     class Routes{
@@ -12,7 +13,8 @@
             'users' => UserController::class,
             'posts' => PostController::class,
             'reactions' => 'reactions',
-            'login' => LoginController::class
+            'session' => LoginController::class,
+            'friends' => FriendsSuggestionController::class,
         ];
 
         public function checkCategoryExistence($name_category){
@@ -110,7 +112,8 @@
                         /*Creamos una instacia de la clase 
                         correspondiente a la categoria solicitada*/
                         
-                        if($objectClass == 'Api\ApiLogin\LoginController'){
+                        if($objectClass == 'Api\ApiLogin\LoginController' || 
+                        $objectClass == 'Api\ApiNotifications\FriendsSuggestionController'){
                             
                             $redis = new Client();
                             $controller = new $objectClass($redis);
